@@ -186,6 +186,12 @@ def flux_map(cobra_model,
             if 'display_name' not in met.notes['map_info']:
                 met.notes['map_info']['display_name'] = (
                     display_name_format(met))
+    else:
+        for met in cobra_model.metabolites:
+            # Don't overwrite existing display names
+            if 'display_name' not in met.notes['map_info']:
+                met.notes['map_info']['display_name'] = ''
+        
 
     # Append model's map_info kwargs
     render_kwargs = dict(cobra_model.notes['map_info'])
